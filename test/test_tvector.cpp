@@ -63,12 +63,16 @@ TEST(TVector, can_set_and_get_element)
 
 TEST(TVector, throws_when_set_element_with_negative_index)
 {
-  ADD_FAILURE();
+	TVector<int> v(4);
+
+	ASSERT_ANY_THROW(v[-1] = 0);
 }
 
 TEST(TVector, throws_when_set_element_with_too_large_index)
 {
-  ADD_FAILURE();
+	TVector<int> v(4);
+
+	ASSERT_ANY_THROW(v[10] = 0);
 }
 
 TEST(TVector, can_assign_vector_to_itself)
@@ -108,7 +112,11 @@ TEST(TVector, vectors_with_different_size_are_not_equal)
 
 TEST(TVector, can_add_scalar_to_vector)
 {
-  ADD_FAILURE();
+	TVector<int> v(4);
+	v[0] = 0;
+	v[0] = v[0] + 2;
+	
+	EXPECT_EQ(2, v[0]);
 }
 
 TEST(TVector, can_subtract_scalar_from_vector)
