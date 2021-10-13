@@ -157,7 +157,7 @@ TVector<ValType> TVector<ValType>::operator-(const TVector<ValType> &v)
     if (StartIndex != v.StartIndex) throw v.StartIndex;
     if (Size != v.Size) throw v.Size;
     TVector<ValType> result(*this);
-    for (int i = StratIndex; i < Size; i++)
+    for (int i = StartIndex; i < Size; i++)
         result.pVector[i] -= v.pVector[i];
     return result;
 } /*-------------------------------------------------------------------------*/
@@ -168,7 +168,7 @@ ValType TVector<ValType>::operator*(const TVector<ValType> &v)
     if (StartIndex != v.StartIndex) throw v.StartIndex;
     if (Size != v.Size) throw v.Size;
     TVector<ValType> result(*this);
-    for (int i = StratIndex; i < Size; i++)
+    for (int i = StartIndex; i < Size; i++)
         result.pVector[i] *= v.pVector[i];
     return result;
 } /*-------------------------------------------------------------------------*/
