@@ -62,11 +62,11 @@ public:
 template <class ValType>
 TVector<ValType>::TVector(int s, int si)
 {
-    if (s < 0) throw s;
-    if (si < 0 || si > s) throw si;
+    if (s < 0 || s > MAX_VECTOR_SIZE) throw s;
+    if (si < 0) throw si;
     Size = s;
     StartIndex = si;
-    pVector = new ValType[Size - StartIndex];
+    pVector = new ValType[Size];
 } /*-------------------------------------------------------------------------*/
 
 template <class ValType> //конструктор копирования
@@ -155,7 +155,7 @@ TVector<ValType> TVector<ValType>::operator+(const TVector<ValType> &v)
     if (Size != v.Size) throw v.Size;
     TVector<ValType> result(Size, StartIndex);
     for (int i = result.StartIndex; i < result.Size; i++)
-        result.pVector[i] = pVector[i] + v.pVector;
+        result.pVector[i] = pVector[i] + v.pVector[i];
     return result;
 } /*-------------------------------------------------------------------------*/
 
@@ -166,7 +166,7 @@ TVector<ValType> TVector<ValType>::operator-(const TVector<ValType> &v)
     if (Size != v.Size) throw v.Size;
     TVector<ValType> result(Size, StartIndex);
     for (int i = result.StartIndex; i < result.Size; i++)
-        result.pVector[i] = pVector[i] - v.pVector;
+        result.pVector[i] = pVector[i] - v.pVector[i];
     return result;
 } /*-------------------------------------------------------------------------*/
 
@@ -175,9 +175,9 @@ ValType TVector<ValType>::operator*(const TVector<ValType> &v)
 {
     if (StartIndex != v.StartIndex) throw v.StartIndex;
     if (Size != v.Size) throw v.Size;
-    TVector<ValType> result(Size, StartIndex);
-    for (int i = result.StartIndex; i < result.Size; i++)
-        result.pVector[i] = pVector[i] * v.pVector;
+    ValType result = 0;
+    for (int i = StartIndex; i < Size; i++)
+        result += pVector[i] * v.pVector[i];
     return result;
 } /*-------------------------------------------------------------------------*/
 
