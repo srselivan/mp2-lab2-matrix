@@ -102,7 +102,11 @@ TEST(TVector, can_assign_vectors_of_equal_size)
 
 TEST(TVector, assign_operator_change_vector_size)
 {
-  ADD_FAILURE();
+	TVector<int> v(4);
+	TVector<int> v1(6);
+	v1 = v;
+
+	EXPECT_EQ(v1.GetSize(), 4);
 }
 
 TEST(TVector, can_assign_vectors_of_different_size)
